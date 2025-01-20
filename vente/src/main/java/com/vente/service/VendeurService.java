@@ -4,6 +4,7 @@ import com.vente.model.Vendeur;
 import com.vente.repository.VendeurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,12 +12,15 @@ public class VendeurService {
 
     @Autowired
     private VendeurRepository vendeurRepository;
+    
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public void inscrireVendeur(Vendeur vendeur) {
         // Vérifier si le login existe déjà
         if (vendeurRepository.findByLogin(vendeur.getLogin()).isPresent()) {
             throw new IllegalArgumentException("Ce login est déjà pris");
         }
+        vendeur.setPassword(passwordEncoder.encode(vendeur.getPassword()));
         vendeurRepository.save(vendeur);
     }
     

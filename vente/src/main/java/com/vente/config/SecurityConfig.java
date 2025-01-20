@@ -1,22 +1,15 @@
 package com.vente.config;
 
-import com.vente.service.VendeurDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final VendeurDetailsService vendeurDetailsService;
-
-    public SecurityConfig(VendeurDetailsService vendeurDetailsService) {
-        this.vendeurDetailsService = vendeurDetailsService;
-    }
 
     @SuppressWarnings({ "removal", "deprecation" })
 	@Bean
@@ -32,9 +25,4 @@ public class SecurityConfig {
 	    return http.build();
 	}
 
-
-    @Bean
-    UserDetailsService userDetailsService() {
-        return vendeurDetailsService;
-    }
 }
