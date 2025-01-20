@@ -13,8 +13,7 @@ public class AffichageObjetService {
     @Autowired
     private ObjetRepository objetRepository;
 
-    public List<Objet> recupererTousLesObjets() {
-        // Récupérer tous les objets dans la base de données
-        return objetRepository.findAll();
+    public List<Objet> rechercherObjetsParMotCle(String keyword) {
+        return objetRepository.rechercherParMotCle(keyword);
     }
 }

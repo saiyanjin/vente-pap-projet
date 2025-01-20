@@ -16,6 +16,9 @@ public class Objet {
     @Column(nullable = false)
     private BigDecimal prix;
 
+    @Column(nullable = false)
+    private boolean vendu = false; // Nouveau champ pour indiquer si l'objet est vendu
+
     @ManyToOne
     @JoinColumn(name = "vendeur_id", nullable = false)
     private Vendeur vendeur;
@@ -43,6 +46,14 @@ public class Objet {
 
     public void setPrix(BigDecimal prix) {
         this.prix = prix;
+    }
+
+    public boolean isVendu() {
+        return vendu;
+    }
+
+    public void setVendu(boolean vendu) {
+        this.vendu = vendu;
     }
 
     public Vendeur getVendeur() {
