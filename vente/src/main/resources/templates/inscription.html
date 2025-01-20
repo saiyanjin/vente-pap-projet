@@ -12,7 +12,7 @@
     <body>
 
         <div class="registration-form">
-            <form th:action="@{/login}" method="post">
+            <form  th:action="@{/inscription}" th:object="${vendeur}" method="POST">
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                 <h1 class="mb-5 d-flex justify-content-center">Inscription</h1>
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
