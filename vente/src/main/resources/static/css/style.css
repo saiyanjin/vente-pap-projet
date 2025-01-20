@@ -2,6 +2,10 @@ body{
     background-color: #0004ff10 !important;
 }
 
+#form-main {
+    border:1px solid red
+}
+
 .registration-form{
 	padding: 50px 0;
 }
