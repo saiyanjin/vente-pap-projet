@@ -36,7 +36,7 @@ public class InscriptionController {
             return "inscription";
         }
         
-        return "redirect:/index";  // Redirection vers l'ajout d'objet
+        return "login"; 
     }
 
 
