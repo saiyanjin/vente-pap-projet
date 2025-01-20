@@ -1,29 +1,60 @@
 <!DOCTYPE html>
+
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Accueil</title>
-</head>
-<body>
-    <h1>Bienvenue sur notre site de vente de particulier à particulier</h1>
 
-    <!-- Partie visible pour les utilisateurs non connectés -->
-    <div th:if="${#authentication.name == 'anonymousUser'}">
-        <a href="/inscription">S'inscrire</a><br>
-        <a href="/login">Se connecter</a><br>
-    </div>
+    <head>
+        <title>Accueil</title>
+        <link rel="stylesheet" href="/css/style.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    </head>
 
-    <!-- Partie visible pour les utilisateurs connectés -->
-    <div th:if="${#authentication.name != 'anonymousUser'}">
-        <h2>Bonjour, <span th:text="${#authentication.name}">Utilisateur</span></h2>
-        <a href="/ajouterObjet">Mettre un objet en vente</a><br>
-        <a href="/rechercher-objets">Rechercher des objets</a><br>
-        <a href="/logout">Déconnexion</a><br>
-    </div>
+    <body>
 
-    <!-- Partie visible uniquement pour les administrateurs -->
-    <div th:if="${#authentication.authorities.contains('ROLE_ADMIN')}">
-        <h3>Pour l'administrateur :</h3>
-        <a href="/chiffre-affaires">Consulter le chiffre d'affaires</a><br>
-    </div>
-</body>
+        <!-- Partie visible pour les utilisateurs non connectés -->
+         <div th:if="${#authentication.name == 'anonymousUser'}">
+            <div class="registration-form">
+                <form>
+                    <h1 class="mb-4 text-center">Bienvenue sur notre site de vente de particulier à particulier</h1>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <button class="btn btn-block ajouter me-3"><a href="/login" class="text-white text-decoration-none">Se connecter</a></button>
+                        <div class="mt-3">ou</div>
+                        <button class="btn btn-block ajouter ms-3"><a href="/inscription" class="text-white text-decoration-none">S'inscrire</a></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Partie visible pour les utilisateurs connectés -->
+        <div th:if="${#authentication.name != 'anonymousUser'}">
+            <div class="registration-form">
+                <form>
+                    <h1 class="mb-4 text-center">Bonjour&nbsp;<span th:text="${#authentication.name}" class="fw-bold fst-italic">Utilisateur</span>, que souhaitez vous faire ?</h1>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="/ajouterObjet" class="text-decoration-none fst-italic fs-5">> Mettre un objet en vente</a></li>
+                        <li class="list-group-item"><a href="/rechercher-objets" class="text-decoration-none fst-italic fs-5">> Rechercher des objets</a></li>
+                        <li class="list-group-item"><a href="/logout" class="text-decoration-none fst-italic fs-5">> Déconnexion</a></li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+
+        <!-- Partie visible uniquement pour les administrateurs -->
+        <div th:if="${#authentication.authorities.contains('ROLE_ADMIN')}">
+            <div class="registration-form">
+                <form>
+                    <h1 class="mb-4 text-center">Bienvenue sur l'interface administrateur</h1>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><a href="/ajouterObjet" class="text-decoration-none fst-italic fs-5">> Mettre un objet en vente</a></li>
+                        <li class="list-group-item"><a href="/rechercher-objets" class="text-decoration-none fst-italic fs-5">> Rechercher des objets</a></li>
+                        <li class="list-group-item"><a href="/chiffre-affaires" class="text-decoration-none fst-italic fs-5">Consulter le chiffre d'affaires</a></li>
+                        <li class="list-group-item"><a href="/logout" class="text-decoration-none fst-italic fs-5">> Déconnexion</a></li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    </body>
+
 </html>
