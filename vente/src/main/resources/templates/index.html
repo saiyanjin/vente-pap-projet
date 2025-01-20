@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Accueil</title>
+</head>
+<body>
+    <h1>Bienvenue sur notre site de vente de particulier à particulier</h1>
+
+    <!-- Partie visible pour les utilisateurs non connectés -->
+    <div th:if="${#authentication.name == 'anonymousUser'}">
+        <a href="/inscription">S'inscrire</a><br>
+        <a href="/login">Se connecter</a><br>
+    </div>
+
+    <!-- Partie visible pour les utilisateurs connectés -->
+    <div th:if="${#authentication.name != 'anonymousUser'}">
+        <h2>Bonjour, <span th:text="${#authentication.name}">Utilisateur</span></h2>
+        <a href="/ajouterObjet">Mettre un objet en vente</a><br>
+        <a href="/rechercher-objets">Rechercher des objets</a><br>
+        <a href="/logout">Déconnexion</a><br>
+    </div>
+
+    <!-- Partie visible uniquement pour les administrateurs -->
+    <div th:if="${#authentication.authorities.contains('ROLE_ADMIN')}">
+        <h3>Pour l'administrateur :</h3>
+        <a href="/chiffre-affaires">Consulter le chiffre d'affaires</a><br>
+    </div>
+</body>
+</html>
