@@ -5,8 +5,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.vente.service.VendeurDetailsService;
@@ -34,12 +38,14 @@ public class SecurityConfig {
         return authProvider;
     }
 
-    @Bean
+	@SuppressWarnings("removal")
+	@Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+        	.csrf().disable()
             .authorizeHttpRequests(requests -> requests
-                .requestMatchers("/", "/inscription", "/css/**", "/favicon.ico", "/js/**").permitAll()
-                .requestMatchers("/mettre-en-vente", "/rechercher-objets").hasRole("USER")
+                .requestMatchers("/", "/inscription","/ajouterObjet", "/css/**", "/js/**").permitAll()
+                .requestMatchers("/rechercher-objets").hasRole("USER")
                 .requestMatchers("/chiffre-affaires").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )
@@ -56,4 +62,5 @@ public class SecurityConfig {
 
         return http.build();
     }
+
 }

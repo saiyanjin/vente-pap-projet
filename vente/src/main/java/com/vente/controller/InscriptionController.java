@@ -36,7 +36,7 @@ public class InscriptionController {
             return "inscription";
         }
         
-        return "login";
+        return "login"; 
     }
 
 

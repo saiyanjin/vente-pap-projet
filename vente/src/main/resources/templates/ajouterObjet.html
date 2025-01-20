@@ -12,7 +12,8 @@
     <body>
 
         <div class="registration-form">
-            <form action="/ajouter" th:object="${objet}" method="POST">
+            <form action="/ajouterObjet" th:object="${objet}" method="POST">
+				
                 <h1 class="mb-5 d-flex justify-content-center">Ajouter un Objet</h1>
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                 <div class="form-group">
@@ -25,6 +26,7 @@
                     <button type="submit" class="btn btn-block ajouter me-2">Ajouter</button>
                     <button type="button" class="btn btn-block retour ms-2"><a href="/" class="text-decoration-none text-white">Retour</a></button>
                 </div>
+                
             </form>
         </div>
 

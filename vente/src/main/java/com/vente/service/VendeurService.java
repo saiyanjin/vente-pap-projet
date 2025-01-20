@@ -2,6 +2,9 @@ package com.vente.service;
 
 import com.vente.model.Vendeur;
 import com.vente.repository.VendeurRepository;
+
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,6 +24,9 @@ public class VendeurService {
             throw new IllegalArgumentException("Ce login est déjà pris");
         }
         vendeur.setPassword(passwordEncoder.encode(vendeur.getPassword()));
+        ArrayList<String> liste = new ArrayList<String>();
+        liste.add("USER");
+        vendeur.setRoles(liste);
         vendeurRepository.save(vendeur);
     }
     
