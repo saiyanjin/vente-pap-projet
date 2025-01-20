@@ -38,12 +38,14 @@ public class SecurityConfig {
         return authProvider;
     }
 
+	@SuppressWarnings("removal")
 	@Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+        	.csrf().disable()
             .authorizeHttpRequests(requests -> requests
-                .requestMatchers("/", "/inscription", "/css/**", "/js/**").permitAll()
-                .requestMatchers("/ajouterObjet", "/rechercher-objets").hasRole("USER")
+                .requestMatchers("/", "/inscription","/ajouterObjet", "/css/**", "/js/**").permitAll()
+                .requestMatchers("/rechercher-objets").hasRole("USER")
                 .requestMatchers("/chiffre-affaires").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )
