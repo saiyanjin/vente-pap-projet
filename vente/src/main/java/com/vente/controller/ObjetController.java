@@ -25,7 +25,7 @@ public class ObjetController {
     private VendeurService vendeurService;
 
     @PreAuthorize("hasRole('USER')")
-    @PostMapping("/ajouter")
+    @PostMapping("/ajouterObjet")
     public String ajouterObjet(@ModelAttribute("objet") Objet objet) {
         // Récupérer l'utilisateur authentifié (c'est un Vendeur)
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

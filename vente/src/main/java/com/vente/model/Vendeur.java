@@ -1,7 +1,8 @@
 package com.vente.model;
 
 import jakarta.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Vendeur {
@@ -9,16 +10,19 @@ public class Vendeur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
+    @Column(nullable = false, unique = true)
     private String login;
+
+    @Column(nullable = false)
     private String password;
+
     private String ville;
-    
-    @OneToMany(mappedBy = "vendeur", cascade = CascadeType.ALL)
-    private List<Objet> objets = new ArrayList<>();
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles = new ArrayList<>();
 
-    // Getters and Setters
+    // Getters et Setters
     public Long getId() {
         return id;
     }
@@ -49,5 +53,13 @@ public class Vendeur {
 
     public void setVille(String ville) {
         this.ville = ville;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 }
