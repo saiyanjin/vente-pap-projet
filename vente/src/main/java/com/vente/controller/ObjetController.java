@@ -23,8 +23,7 @@ public class ObjetController {
     
     @Autowired
     private VendeurService vendeurService;
-
-    @PreAuthorize("hasRole('USER')")
+    
     @PostMapping("/ajouterObjet")
     public String ajouterObjet(@ModelAttribute("objet") Objet objet) {
         // Récupérer l'utilisateur authentifié (c'est un Vendeur)
@@ -40,7 +39,7 @@ public class ObjetController {
         // Sauvegarder l'objet
         objetService.enregistrerObjet(objet);
 
-        return "redirect:/objets";
+        return "index";
     }
 
     @GetMapping("/ajouterObjet")
