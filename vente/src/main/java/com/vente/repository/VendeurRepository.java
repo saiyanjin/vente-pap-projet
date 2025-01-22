@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VendeurRepository extends JpaRepository<Vendeur, Long> {
     Optional<Vendeur> findByLogin(String login);
+    
 }

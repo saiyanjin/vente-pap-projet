@@ -42,7 +42,7 @@ public class SecurityConfig {
 	@Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-        	.csrf().disable()
+        	
             .authorizeHttpRequests(requests -> requests
                 .requestMatchers("/", "/inscription","/ajouterObjet","/objets", "/css/**", "/js/**").permitAll()
                 .requestMatchers("/rechercher-objets").hasRole("USER")
@@ -58,7 +58,8 @@ public class SecurityConfig {
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
                 .permitAll()
-            );
+            )
+            .csrf().disable();
 
         return http.build();
     }

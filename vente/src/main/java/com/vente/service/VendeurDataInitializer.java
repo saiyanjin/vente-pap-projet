@@ -31,7 +31,7 @@ public class VendeurDataInitializer implements CommandLineRunner {
 
             Vendeur vendeur2 = new Vendeur();
             vendeur2.setLogin("admin");
-            vendeur2.setPassword(passwordEncoder.encode("adminpassword")); // Encodage du mot de passe
+            vendeur2.setPassword(passwordEncoder.encode("admin")); // Encodage du mot de passe
             vendeur2.setRoles(Arrays.asList("ADMIN")); // Exemple de rôle
             vendeur2.setVille("paris");
 

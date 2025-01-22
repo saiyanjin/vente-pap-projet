@@ -32,20 +32,24 @@
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item"><a href="/ajouterObjet" class="text-decoration-none fst-italic fs-5">> Mettre un objet en vente</a></li>
                         <li class="list-group-item"><a href="/objets" class="text-decoration-none fst-italic fs-5">> Rechercher des objets</a></li>
+                        <li class="list-group-item"><a href="/mes-objets" class="text-decoration-none fst-italic fs-5">> Mettre un objet en vente</a></li>
                         <li class="list-group-item"><a href="/logout" class="text-decoration-none fst-italic fs-5">> Déconnexion</a></li>
                     </ul>
                 </form>
             </div>
         </div>
+        
+        
 
         <!-- Partie visible uniquement pour les administrateurs -->
-        <div th:if="${#authentication.authorities.contains('ROLE_ADMIN')}">
+        <div th:if="${#authentication.name == 'admin'}">
             <div class="registration-form">
                 <form>
                     <h1 class="mb-4 text-center">Bienvenue sur l'interface administrateur</h1>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item"><a href="/ajouterObjet" class="text-decoration-none fst-italic fs-5">> Mettre un objet en vente</a></li>
                         <li class="list-group-item"><a href="/objets" class="text-decoration-none fst-italic fs-5">> Rechercher des objets</a></li>
+                        <li class="list-group-item"><a href="/mes-objets" class="text-decoration-none fst-italic fs-5">> Mettre un objet en vente</a></li>
                         <li class="list-group-item"><a href="/chiffre-affaires" class="text-decoration-none fst-italic fs-5">Consulter le chiffre d'affaires</a></li>
                         <li class="list-group-item"><a href="/logout" class="text-decoration-none fst-italic fs-5">> Déconnexion</a></li>
                     </ul>
