@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mes Objets</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <h1>Mes Objets</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Descriptif</th>
+                <th>Prix</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="objet : ${objets}">
+            <td th:text="${objet.descriptif}"></td>
+            <td th:text="${objet.prix} + ' €'"></td>
+            <td>
+                <span th:if="${objet.vendu}">Vendu</span>
+                <form th:if="${!objet.vendu}" th:action="@{/mes-objets}" method="post">
+                    <input type="hidden" name="id" th:value="${objet.id}">
+                    <button type="submit">Vendre</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>

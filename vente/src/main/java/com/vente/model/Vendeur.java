@@ -21,6 +21,8 @@ public class Vendeur {
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
+    
+    
 
     // Getters et Setters
     public Long getId() {
