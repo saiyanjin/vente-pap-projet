@@ -51,15 +51,15 @@ public class SecurityConfig {
             )
             .formLogin(form -> form
                 .loginPage("/login")
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/", true)
                 .permitAll()
             )
             .logout(logout -> logout
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))  // Définir l'URL de déconnexion
-                    .logoutSuccessUrl("/logout.done")  // Rediriger vers /logout.done après une déconnexion réussie
-                    .deleteCookies("JSESSIONID")  // Supprimer le cookie JSESSIONID
-                    .invalidateHttpSession(true)  // Invalider la session HTTP
-                );
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .logoutSuccessUrl("/logout.done")
+                    .deleteCookies("JSESSIONID")
+                    .invalidateHttpSession(true)
+            );
 
         return http.build();
     }
