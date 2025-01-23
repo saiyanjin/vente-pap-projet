@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ObjetRepository extends JpaRepository<Objet, Long> {
 
@@ -17,4 +18,8 @@ public interface ObjetRepository extends JpaRepository<Objet, Long> {
     List<Objet> findByVendeurLogin(String login);
     
     List<Objet> findByVendeurAndVenduFalse(@Param("vendeur") Vendeur vendeur);
+    
+    @Query("SELECT SUM(o.prix) FROM Objet o WHERE o.vendu = true")
+    Optional<Double> sumPrixByVenduTrue();
+
 }
