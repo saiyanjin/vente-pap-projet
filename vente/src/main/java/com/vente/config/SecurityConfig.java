@@ -38,14 +38,13 @@ public class SecurityConfig {
         return authProvider;
     }
 
-	@SuppressWarnings("removal")
 	@Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
         	
             .authorizeHttpRequests(requests -> requests
                 .requestMatchers("/", "/inscription", "/css/**", "/js/**").permitAll()
-                .requestMatchers("/rechercher-objets","/ajouterObjet","/objets","/mes-objets").hasRole("USER")
+                .requestMatchers("/rechercher-objets", "/ajouterObjet", "/objets", "/mes-objets").hasAnyRole("USER", "ADMIN")
                 .requestMatchers("/chiffre-affaires").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )
