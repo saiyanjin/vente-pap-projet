@@ -15,7 +15,8 @@
             <form action="/ajouterObjet" th:object="${objet}" method="POST">
 				
                 <h1 class="mb-5 d-flex justify-content-center">Ajouter un Objet</h1>
-                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                
                 <div class="form-group">
                     <input type="text" class="form-control item" placeholder="Descriptif" th:field="*{descriptif}" id="descriptif" name="descriptif" required>
                 </div>

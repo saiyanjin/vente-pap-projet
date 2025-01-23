@@ -24,9 +24,7 @@ public class VendeurService {
             throw new IllegalArgumentException("Ce login est déjà pris");
         }
         vendeur.setPassword(passwordEncoder.encode(vendeur.getPassword()));
-        ArrayList<String> liste = new ArrayList<String>();
-        liste.add("USER");
-        vendeur.setRoles(liste);
+        vendeur.setRole("ROLE_USER");
         vendeurRepository.save(vendeur);
     }
     

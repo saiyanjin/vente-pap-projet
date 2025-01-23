@@ -19,10 +19,8 @@ public class Vendeur {
 
     private String ville;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    private List<String> roles = new ArrayList<>();
-    
-    
+    @Column(nullable = false) // On suppose que chaque vendeur a obligatoirement un rôle
+    private String role; // Un seul rôle par utilisateur (par exemple : "ROLE_ADMIN" ou "ROLE_USER")
 
     // Getters et Setters
     public Long getId() {
@@ -57,11 +55,11 @@ public class Vendeur {
         this.ville = ville;
     }
 
-    public List<String> getRoles() {
-        return roles;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
+    public void setRole(String role) {
+        this.role = role;
     }
 }

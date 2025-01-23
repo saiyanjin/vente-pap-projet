@@ -44,8 +44,9 @@ public class SecurityConfig {
         http
         	
             .authorizeHttpRequests(requests -> requests
-                .requestMatchers("/", "/inscription","/ajouterObjet","/objets", "/css/**", "/js/**").permitAll()
-                .requestMatchers("/rechercher-objets").hasRole("USER")
+                .requestMatchers("/", "/inscription", "/css/**", "/js/**").permitAll()
+                .requestMatchers("/rechercher-objets","/ajouterObjet","/objets","/mes-objets").hasRole("USER")
+                .requestMatchers("/chiffre-affaires").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
@@ -57,8 +58,7 @@ public class SecurityConfig {
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
                 .permitAll()
-            )
-            .csrf().disable();
+            );
 
         return http.build();
     }
