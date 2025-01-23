@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.vente.service.VendeurDetailsService;
 
@@ -54,10 +55,11 @@ public class SecurityConfig {
                 .permitAll()
             )
             .logout(logout -> logout
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
-                .permitAll()
-            );
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))  // Définir l'URL de déconnexion
+                    .logoutSuccessUrl("/logout.done")  // Rediriger vers /logout.done après une déconnexion réussie
+                    .deleteCookies("JSESSIONID")  // Supprimer le cookie JSESSIONID
+                    .invalidateHttpSession(true)  // Invalider la session HTTP
+                );
 
         return http.build();
     }
