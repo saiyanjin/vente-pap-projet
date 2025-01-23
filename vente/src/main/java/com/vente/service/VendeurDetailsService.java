@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,12 +24,12 @@ public class VendeurDetailsService implements UserDetailsService {
         Vendeur vendeur = vendeurRepository.findByLogin(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé : " + username));
 
+        // Ajout du rôle unique en tant que SimpleGrantedAuthority
         return new User(
                 vendeur.getLogin(),
                 vendeur.getPassword(),
-                vendeur.getRoles().stream()
-                        .map(SimpleGrantedAuthority::new)
-                        .collect(Collectors.toList())
+                List.of(new SimpleGrantedAuthority(vendeur.getRole())) // Utilisation d'un seul rôle
         );
     }
 }
+
