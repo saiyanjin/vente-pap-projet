@@ -11,7 +11,7 @@
     <body>
 
         <!-- Partie visible pour les utilisateurs non connectés -->
-         <div th:if="${#authentication.name == 'anonymousUser'}">
+         <div sec:authorize="isAnonymous()">
             <div class="registration-form">
                 <form>
                     <h1 class="mb-4 text-center">Bienvenue sur notre site de vente de particulier à particulier</h1>
@@ -25,7 +25,7 @@
         </div>
 
         <!-- Partie visible pour les utilisateurs connectés -->
-        <div th:if="${#authentication.name != 'anonymousUser' && #authentication.name != 'admin'}">
+        <div sec:authorize="hasRole('ROLE_USER')">
             <div class="registration-form">
                 <form>
                     <h1 class="mb-4 text-center">Bonjour&nbsp;<span th:text="${#authentication.name}" class="fw-bold fst-italic">Utilisateur</span>, que souhaitez-vous faire ?</h1>
@@ -42,7 +42,7 @@
         
 
         <!-- Partie visible uniquement pour les administrateurs -->
-        <div th:if="${#authentication.name == 'admin'}">
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
             <div class="registration-form">
                 <form>
                     <h1 class="mb-4 text-center">Bienvenue sur l'interface administrateur</h1>
